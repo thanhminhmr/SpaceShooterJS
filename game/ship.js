@@ -81,6 +81,7 @@ export class Ship extends Entity {
 			this.callbacks.spawn(new Laser(timestamp, this.callbacks, this.region, laserX, laserY, 0));
 			this.callbacks.spawn(new Laser(timestamp, this.callbacks, this.region, laserX, laserY, -1));
 			this.callbacks.spawn(new Laser(timestamp, this.callbacks, this.region, laserX, laserY, 1));
+			this.callbacks.shoot();
 		}
 	}
 

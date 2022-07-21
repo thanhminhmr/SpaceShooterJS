@@ -3,6 +3,7 @@ import { GameScreen } from "./screen/game_screen.js"
 import { GameStartScreen } from "./screen/game_start_screen.js"
 import { GameOverScreen } from "./screen/game_over_screen.js"
 import { HighscoreScreen } from "./screen/highscore_screen.js"
+import { SoundFX } from "./soundfx.js";
 
 const body = document.querySelector("body");
 const dispatcher = new Dispatcher();
@@ -10,6 +11,8 @@ const gameScreen = new GameScreen(body, dispatcher);
 const gameStartScreen = new GameStartScreen(body, dispatcher);
 const gameOverScreen = new GameOverScreen(body, dispatcher);
 const highscoreScreen = new HighscoreScreen(body, dispatcher);
+const hitSfx = new SoundFX(dispatcher, "sound-hit", "./assets/hit.wav");
+const shootSfx = new SoundFX(dispatcher, "sound-shoot", "./assets/shoot.wav");
 
 dispatcher.register("game-end", score => {
     highscoreScreen.update(score);

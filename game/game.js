@@ -31,7 +31,9 @@ export class Game {
 				} else if (entity instanceof Enemy) {
 					this.enemies.delete(entity);
 				}
-			}
+			},
+			shoot: () => dispatcher.dispatch("sound-shoot"),
+			hit: () => dispatcher.dispatch("sound-hit")
 		});
 
 		this.enemies = new Map();

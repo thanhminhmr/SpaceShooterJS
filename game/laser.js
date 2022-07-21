@@ -26,6 +26,7 @@ export class Laser extends Entity {
 
 	collided(entity) {
 		this.callbacks.despawn(this);
+		this.callbacks.hit();
 	}
 
 	draw(ctx) {
