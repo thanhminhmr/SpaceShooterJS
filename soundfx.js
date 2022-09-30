@@ -1,13 +1,12 @@
 export class SoundFX {
-	static get LIMIT() { return 10; }
+	static get LIMIT() { return 16; }
 
-	constructor(dispatcher, eventName, source) {
+	constructor(source) {
 		this.index = 0;
 		this.audios = [];
 		for (let i = 0; i < SoundFX.LIMIT; i++) {
 			this.audios.push(new Audio(source));
 		}
-		dispatcher.register(eventName, this.play);
 	}
 
 	play = () => {

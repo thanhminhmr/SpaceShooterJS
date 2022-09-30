@@ -11,8 +11,6 @@ export class Entity {
         this.dy = 0;
 
         this.region = { minX: 0, minY: 0, maxX: 0, maxY: 0 };
-
-        this.inside = true;
     }
 
     setPos(x, y) {
@@ -70,7 +68,7 @@ export class Entity {
     }
 
     static isCollided(a, b) {
-        return a.x <= b.x + b.w && b.x <= a.x + a.w
-            && a.y <= b.y + b.h && b.y <= a.y + a.h;
+        return a.x - a.w / 2 <= b.x + b.w / 2 && b.x - b.w / 2 <= a.x + a.w / 2
+            && a.y - a.h / 2 <= b.y + b.h / 2 && b.y - b.h / 2 <= a.y + a.h / 2;
     }
 }

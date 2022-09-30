@@ -11,8 +11,6 @@ const gameScreen = new GameScreen(body, dispatcher);
 const gameStartScreen = new GameStartScreen(body, dispatcher);
 const gameOverScreen = new GameOverScreen(body, dispatcher);
 const highscoreScreen = new HighscoreScreen(body, dispatcher);
-const hitSfx = new SoundFX(dispatcher, "sound-hit", "./assets/hit.wav");
-const shootSfx = new SoundFX(dispatcher, "sound-shoot", "./assets/shoot.wav");
 
 dispatcher.register("game-end", score => {
     highscoreScreen.update(score);
@@ -39,6 +37,11 @@ dispatcher.register("gameover-highscore", () => {
 dispatcher.register("highscore-back", () => {
     highscoreScreen.hide();
 });
+
+const hitSfx = new SoundFX("./assets/hit.wav");
+const shootSfx = new SoundFX("./assets/shoot.wav");
+dispatcher.register("sound-hit", hitSfx.play);
+dispatcher.register("sound-shoot", shootSfx.play);
 
 
 gameStartScreen.show();

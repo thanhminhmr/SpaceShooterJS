@@ -42,12 +42,15 @@ export class Game {
 
 		this.onKeyboard = this.ship.onKeyboard;
 		this.score = 0;
+		this.lastEnemy = 0;
 
 		this.nextFrameCaller(this.render);
 	}
 
 	render = timestamp => {
-		if (this.enemies.size < 50 && Math.random() > 0.5) {
+		const delta = timestamp - this.lastEnemy;
+		if (delta * 0.05 > Math.random()) {
+			this.lastEnemy = timestamp;
 			const enemy = new Enemy(timestamp, this.callbacks, this.region);
 			this.enemies.set(enemy, enemy);
 		}
@@ -59,7 +62,10 @@ export class Game {
 		let shipExploded = false;
 		for (const enemy of this.enemies.values()) {
 			for (const laser of this.lasers.values()) {
-				if (enemy.checkCollide(laser) && this.ship.alive) this.updateScore();
+				if (enemy.checkCollide(laser) && this.ship.alive) {
+					this.updateScore();
+					break;
+				}
 			}
 			if (this.ship.alive && enemy.checkCollide(this.ship)) {
 				shipExploded = true;

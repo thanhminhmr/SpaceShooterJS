@@ -2,7 +2,7 @@ import { Entity } from "./entity.js";
 import { Laser } from "./laser.js";
 
 export class Ship extends Entity {
-	static get COLOR() { return "#F73"; }
+	static get COLOR() { return "#F90"; }
 	static get WIDTH() { return 30; }
 	static get HEIGHT() { return 30; }
 	static get SPEED() { return 0.5; }
@@ -32,15 +32,15 @@ export class Ship extends Entity {
 	}
 
 	onKeyboard = (key, state) => {
-		if (key == Ship.KEYBOARD_ARROW_UP) {
+		if (key === Ship.KEYBOARD_ARROW_UP) {
 			this.arrowUp = state;
-		} else if (key == Ship.KEYBOARD_ARROW_DOWN) {
+		} else if (key === Ship.KEYBOARD_ARROW_DOWN) {
 			this.arrowDown = state;
-		} else if (key == Ship.KEYBOARD_ARROW_LEFT) {
+		} else if (key === Ship.KEYBOARD_ARROW_LEFT) {
 			this.arrowLeft = state;
-		} else if (key == Ship.KEYBOARD_ARROW_RIGHT) {
+		} else if (key === Ship.KEYBOARD_ARROW_RIGHT) {
 			this.arrowRight = state;
-		} else if (key == Ship.KEYBOARD_SPACEBAR) {
+		} else if (key === Ship.KEYBOARD_SPACEBAR) {
 			this.spacebar = state;
 		}
 	}
@@ -81,6 +81,10 @@ export class Ship extends Entity {
 			this.callbacks.spawn(new Laser(timestamp, this.callbacks, this.region, laserX, laserY, 0));
 			this.callbacks.spawn(new Laser(timestamp, this.callbacks, this.region, laserX, laserY, -1));
 			this.callbacks.spawn(new Laser(timestamp, this.callbacks, this.region, laserX, laserY, 1));
+			this.callbacks.spawn(new Laser(timestamp, this.callbacks, this.region, laserX, laserY, -2));
+			this.callbacks.spawn(new Laser(timestamp, this.callbacks, this.region, laserX, laserY, 2));
+			this.callbacks.spawn(new Laser(timestamp, this.callbacks, this.region, laserX, laserY, -3));
+			this.callbacks.spawn(new Laser(timestamp, this.callbacks, this.region, laserX, laserY, 3));
 			this.callbacks.shoot();
 		}
 	}
@@ -104,6 +108,9 @@ export class Ship extends Entity {
 			ctx.lineTo(this.x + ww, this.y + hh);
 			ctx.closePath();
 			ctx.fill();
+			ctx.strokeStyle = Ship.COLOR;
+			ctx.lineWidth = 2;
+			ctx.stroke();
 			ctx.restore();
 		}
 	}

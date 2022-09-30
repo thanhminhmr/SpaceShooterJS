@@ -1,12 +1,12 @@
 import { Entity } from "./entity.js";
 
 export class Laser extends Entity {
-	static get COLOR() { return "#FDB"; }
+	static get COLOR() { return "#F90"; }
 	static get WIDTH() { return 5; }
 	static get HEIGHT() { return 20; }
 	static get SPEED() { return 0.75; }
 
-	static get STEP_ANGLE() { return Math.PI / 48; }
+	static get STEP_ANGLE() { return Math.PI / 24; }
 
 	constructor(timestamp, callbacks, region, x, y, step) {
 		super(timestamp, callbacks);
@@ -21,7 +21,7 @@ export class Laser extends Entity {
 	}
 
     checkCollide(entity) {
-        return entity instanceof Enemy && super.checkCollide(entity);
+        return !(entity instanceof Laser) && super.checkCollide(entity);
     }
 
 	collided(entity) {
